@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use App\Service\PlatformType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -17,7 +18,7 @@ class Project
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'projects')]
-    private ?Client $client_id = null;
+    private ?Client $client = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -34,7 +35,7 @@ class Project
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 3, nullable: true)]
     private ?string $hourly_rate = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(type: Types::STRING, enumType: PlatformType::class)]
     private ?string $platform = null;
 
     #[ORM\OneToMany(mappedBy: 'project_id', targetEntity: Task::class, orphanRemoval: true)]
@@ -54,14 +55,14 @@ class Project
         return $this->id;
     }
 
-    public function getClientId(): ?Client
+    public function getClient(): ?Client
     {
-        return $this->client_id;
+        return $this->client;
     }
 
-    public function setClientId(?Client $client_id): static
+    public function setClient(?Client $client): static
     {
-        $this->client_id = $client_id;
+        $this->client = $client;
 
         return $this;
     }

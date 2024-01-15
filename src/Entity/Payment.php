@@ -14,36 +14,36 @@ class Payment
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'payments')]
-    private ?Project $project_id = null;
+    private ?Project $project = null;
 
     #[ORM\ManyToOne(inversedBy: 'payments')]
-    private ?Client $client_id = null;
+    private ?Client $client = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getProjectId(): ?Project
+    public function getProject(): ?Project
     {
-        return $this->project_id;
+        return $this->project;
     }
 
-    public function setProjectId(?Project $project_id): static
+    public function setProject(?Project $project): static
     {
-        $this->project_id = $project_id;
+        $this->project = $project;
 
         return $this;
     }
 
-    public function getClientId(): ?Client
+    public function getClient(): ?Client
     {
-        return $this->client_id;
+        return $this->client;
     }
 
-    public function setClientId(?Client $client_id): static
+    public function setClient(?Client $client): static
     {
-        $this->client_id = $client_id;
+        $this->client = $client;
 
         return $this;
     }
