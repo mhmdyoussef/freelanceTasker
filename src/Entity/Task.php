@@ -3,6 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\TaskRepository;
+use App\Service\PriorityType;
+use App\Service\Status;
+use App\Service\TaskType;
+use DateTime;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,17 +28,17 @@ class Task
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $priority = null;
+    #[ORM\Column(type: Types::STRING, enumType: PriorityType::class)]
+    private $priority = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeInterface $start_date = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeInterface $due_date = null;
 
-    #[ORM\Column]
-    private ?bool $status = null;
+    #[ORM\Column(type: Types::STRING, enumType: Status::class)]
+    private $status = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 3)]
     private ?string $price = null;
@@ -45,8 +49,8 @@ class Task
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 3)]
     private ?string $total = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $task_type = null;
+    #[ORM\Column(type: Types::STRING, enumType: TaskType::class)]
+    private $task_type = null;
 
     public function getId(): ?int
     {
@@ -89,12 +93,12 @@ class Task
         return $this;
     }
 
-    public function getPriority(): ?string
+    public function getPriority()
     {
         return $this->priority;
     }
 
-    public function setPriority(?string $priority): static
+    public function setPriority($priority): static
     {
         $this->priority = $priority;
 
@@ -125,12 +129,12 @@ class Task
         return $this;
     }
 
-    public function isStatus(): ?bool
+    public function isStatus()
     {
         return $this->status;
     }
 
-    public function setStatus(bool $status): static
+    public function setStatus($status): static
     {
         $this->status = $status;
 
@@ -173,12 +177,12 @@ class Task
         return $this;
     }
 
-    public function getTaskType(): ?string
+    public function getTaskType()
     {
         return $this->task_type;
     }
 
-    public function setTaskType(string $task_type): static
+    public function setTaskType($task_type): static
     {
         $this->task_type = $task_type;
 

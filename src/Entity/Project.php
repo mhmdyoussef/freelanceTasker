@@ -29,14 +29,14 @@ class Project
     #[ORM\Column]
     private array $credentials = [];
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 3, nullable: true)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $estimated_price = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 3, nullable: true)]
+    #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
     private ?string $hourly_rate = null;
 
     #[ORM\Column(type: Types::STRING, enumType: PlatformType::class)]
-    private ?string $platform = null;
+    private $platform = null;
 
     #[ORM\OneToMany(mappedBy: 'project_id', targetEntity: Task::class, orphanRemoval: true)]
     private Collection $tasks;
@@ -127,12 +127,12 @@ class Project
         return $this;
     }
 
-    public function getPlatform(): ?string
+    public function getPlatform()
     {
         return $this->platform;
     }
 
-    public function setPlatform(?string $platform): static
+    public function setPlatform($platform): static
     {
         $this->platform = $platform;
 

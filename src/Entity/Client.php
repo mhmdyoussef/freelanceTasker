@@ -38,6 +38,9 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'client_id', targetEntity: Payment::class)]
     private Collection $payments;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -189,5 +192,17 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $created_at): static
+    {
+        $this->created_at = $created_at;
+
+        return $this;
     }
 }
