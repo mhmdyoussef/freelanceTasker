@@ -39,6 +39,10 @@ class TaskCrudController extends AbstractCrudController
             ->setLabel('Type')
             ->setColumns(2);
 
+        yield TextEditorField::new('description')
+            ->setRequired(false)
+            ->setColumns(12);
+
         yield DateField::new('start_date')
             ->setRequired(false)
             ->setColumns(2)
@@ -68,11 +72,6 @@ class TaskCrudController extends AbstractCrudController
             ->setRequired(false)
             ->setColumns(2)
             ->setCurrency('USD');
-
-        yield TextEditorField::new('description')
-            ->setRequired(false)
-            ->setColumns(12);
-
     }
 
 }

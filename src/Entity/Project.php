@@ -26,8 +26,9 @@ class Project
     #[ORM\Column(length: 255)]
     private ?string $domain_name = null;
 
-    #[ORM\Column]
-    private array $credentials = [];
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $credentials = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
     private ?string $estimated_price = null;
@@ -91,12 +92,12 @@ class Project
         return $this;
     }
 
-    public function getCredentials(): array
+    public function getCredentials(): ?string
     {
         return $this->credentials;
     }
 
-    public function setCredentials(array $credentials): static
+    public function setCredentials(string $credentials): static
     {
         $this->credentials = $credentials;
 

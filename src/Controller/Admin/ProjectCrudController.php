@@ -6,8 +6,8 @@ use App\Entity\Project;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
@@ -30,8 +30,7 @@ class ProjectCrudController extends AbstractCrudController
 
         yield UrlField::new('domain_name');
 
-        yield CollectionField::new('credentials')
-            ->hideOnIndex();
+        yield TextEditorField::new('credentials');
 
         yield MoneyField::new('estimated_price')
             ->setCurrency('USD')
@@ -39,8 +38,6 @@ class ProjectCrudController extends AbstractCrudController
 
         yield MoneyField::new('hourly_rate')
             ->setCurrency('USD');
-
-//        yield ArrayField::new('credentials');
     }
 
 }
