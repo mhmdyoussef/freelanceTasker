@@ -199,4 +199,10 @@ class Project
 
         return $this;
     }
+
+    // show project name on relations
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
