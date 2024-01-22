@@ -189,6 +189,7 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    // shows client name on relations
     public function __toString()
     {
         return $this->name;
