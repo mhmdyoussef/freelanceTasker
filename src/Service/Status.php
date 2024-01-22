@@ -4,8 +4,8 @@ namespace App\Service;
 
 enum Status: string
 {
-    case Open = 'open';
-    case Progress = 'progress';
+    case BackLog = 'backlog';
+    case InProgress = 'progress';
     case Completed = 'completed';
     case Accepted = 'accepted';
     case CustomerReview = 'review';
