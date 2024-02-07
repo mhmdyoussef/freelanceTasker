@@ -31,7 +31,7 @@ class Project
     private ?string $credentials = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2, nullable: true)]
-    private ?string $estimated_price = null;
+    private ?string $budget = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2, nullable: true)]
     private ?string $hourly_rate = null;
@@ -104,14 +104,14 @@ class Project
         return $this;
     }
 
-    public function getEstimatedPrice(): ?string
+    public function getBudget(): ?string
     {
-        return $this->estimated_price;
+        return $this->budget;
     }
 
-    public function setEstimatedPrice(?string $estimated_price): static
+    public function setBudget(?string $budget): static
     {
-        $this->estimated_price = $estimated_price;
+        $this->budget = $budget;
 
         return $this;
     }
