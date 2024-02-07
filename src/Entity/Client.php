@@ -30,7 +30,13 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $firstname = null;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $lastname = null;
+
+    #[ORM\Column(type: 'string', nullable: true)]
+    private ?string $email = null;
 
     #[ORM\OneToMany(mappedBy: 'client_id', targetEntity: Project::class)]
     private Collection $projects;
@@ -117,15 +123,37 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getName(): ?string
+    public function getFirstname(): ?string
     {
-        return $this->name;
+        return $this->firstname;
     }
 
-    public function setName(string $name): static
+    public function setFirstname(string $firstname): static
     {
-        $this->name = $name;
+        $this->firstname = $firstname;
 
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): static
+    {
+        $this->lastname = $lastname;
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): static
+    {
+        $this->email = $email;
         return $this;
     }
 
@@ -189,10 +217,15 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getFullName(): string
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
+    }
+
     // shows client name on relations
     public function __toString()
     {
-        return $this->name;
+        return $this->getFullName();
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
