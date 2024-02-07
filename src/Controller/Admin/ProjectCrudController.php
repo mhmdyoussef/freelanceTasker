@@ -32,7 +32,7 @@ class ProjectCrudController extends AbstractCrudController
 
         yield TextEditorField::new('credentials');
 
-        yield MoneyField::new('estimated_price')
+        yield MoneyField::new('budget')
             ->setCurrency('USD')
             ->hideOnIndex();
 
